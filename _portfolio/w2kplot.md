@@ -1,13 +1,13 @@
 ---
-title: "spaghetti"
-excerpt: "command line tool for plotting band structures from wien2k calculations <img width=200 src='/images/w2kplot.png'/>"
+title: "w2kplot"
+excerpt: "command line tool for plotting band structures from WIEN2k calculations <img width=200 src='/images/w2kplot.png'/>"
 collection: portfolio
 ---
 
 
 <p align="center">
 <a href="https://github.com/harrisonlabollita/w2kplot">
-<img width = "300" src="logo.png" alt="w2kplot"/>
+<img width = "300" src="/images/w2kplot.png" alt="w2kplot"/>
 </a>
 </p>
 
