@@ -9,13 +9,15 @@ redirect_from:
 
 {% include base_path %}
 
+[**Download CV**](/files/cv_labollita.pdf)
+
 Education
-======
+=========
 * Ph.D in Physics, Arizona State University, 2023 (expected)
 * B.S. in Applied Mathematics & Physics, Piedmont College, 2019 (Summa Cum Laude)
 
 Research experience
-======
+==================
 * Currently: Graduate Research Assistant
   * Arizona State University
   * Supervisor: Professor Antia S. Botana
