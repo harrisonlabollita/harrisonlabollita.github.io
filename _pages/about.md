@@ -8,14 +8,9 @@ redirect_from:
   - /about.html
 ---
 
-I'm a graduate student at [Arizona State University](https://abotana.physics.asu.edu/people) studying computational condensed matter physics. I'm currently interested in using and developing computational tools to study real strongly correlated materials.
+By day, I'm a graduate student at [Arizona State University](https://abotana.physics.asu.edu/people) working in the [Botana Group](https://abotana.physics.asu.edu). Broadly, I'm interested in using and developing computational tools to study strongly correlated materials. Specifically, I study the correlated electronic structure of rare-earth nickelates using a combination of density-functional theory (DFT) and dynamical mean-field theory (DMFT). [Here](https://harrisonlabollita.github.io/publications/) are some of recent publications. 
 
-
-Research interests
-------------------
-
-I'm a computational condensed matter physicist (in training 🤓) interested in studying strongly correlated electron systems. Currently, I'm studying the electronic structure of the rare-earth nickelates using density-functional theory (DFT) as a starting place and employing more sophisticated many-body techniques to uncover ther underlying physics. Broadly, I'm interested in using in developing computational tools to study strongly correlated materials at large. The main two computational frameworks I use are density-functional theory (DFT) and dynamical mean-field theory (DMFT). Check out my recent [publications](https://harrisonlabollita.github.io/publications/) to read more about what I've been up to!
-
+By night, I'm a wanna be [Python developer](https://github.com/harrisonlabollita), machine learning enthusiast, and [freelance tutor](https://is.gd/exAOqr)! During my freetime, I like to be outstide running, playing tennis, or on the golf course.
 
 **Let's get in touch!**
 I'd love to chat or get a ☕️ if you're in Tempe
