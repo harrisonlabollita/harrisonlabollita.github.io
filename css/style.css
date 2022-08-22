@@ -1,0 +1,76 @@
+body {
+    font-family: helvetica;
+}
+
+#wrapper {
+    margin-left:auto;
+    margin-right:auto;
+    width:960px;
+}
+
+.tab {
+    float: left;
+    background-color: #00000;
+    width: 30%;
+    height: 100px;
+    margin-top: 150px;
+}
+
+.tab button {
+    display: block;
+    background-color: inherit;
+    color: #ddd;
+    padding: 10px 8px;
+    width: 100%;
+    border: none;
+    outline: none;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s;
+    font-family: helvetica;
+    font-size: 30px;
+}
+
+.tab button:hover {
+    color: black;
+}
+
+
+.tabcontent {
+    display: none;
+    float: left;
+    width: 50%;
+    border-left: none;
+    height: 100px;
+    margin-top: 150px;
+}
+
+.homecontent {
+    display: none;
+    float: left;
+    width: 70%;
+    border-left: none;
+    height: 300px;
+    margin-top: 300px;
+}
+
+.social-icons {
+    display: flex;
+    float: left;
+    width: 70%;
+}
+
+.social-icons__link {
+    padding:.8rem
+}
+
+.social-icons__link:not(:last-child) {
+    margin-right:1em
+}
+
+.social-icons__link .social-icons__icon {
+    width: 2rem;
+    height: 2rem;
+    background-size: contain;
+    background-repeat:no-repeat
+}
