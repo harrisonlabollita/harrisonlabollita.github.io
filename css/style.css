@@ -50,7 +50,7 @@ body {
     border-left: none;
     margin-top: 150px;
     height:auto;
-    padding-bottom: 50px;
+    padding-bottom: 100px;
 }
 
 .homecontent {
@@ -97,4 +97,3 @@ a:hover {
     color: #ddd;
     text-decoration: underline;
 }
-
