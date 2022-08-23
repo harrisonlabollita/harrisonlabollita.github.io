@@ -2,11 +2,14 @@ body {
     font-family: helvetica;
 }
 
+
 #wrapper {
-    margin-left:auto;
-    margin-right:auto;
+    margin-left: auto;
+    margin-right: auto;
     width:960px;
 }
+
+
 
 .tab {
     float: left;
@@ -35,14 +38,19 @@ body {
     color: black;
 }
 
+.tabwrapper {
+    flex: 1;
+}
+
 
 .tabcontent {
     display: none;
     float: left;
     width: 50%;
     border-left: none;
-    height: 100px;
     margin-top: 150px;
+    height:auto;
+    padding-bottom: 50px;
 }
 
 .homecontent {
@@ -74,3 +82,19 @@ body {
     background-size: contain;
     background-repeat:no-repeat
 }
+
+a:link {
+    color: black;
+    text-decoration: underline;
+}
+
+a:visited{
+    color: black;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: #ddd;
+    text-decoration: underline;
+}
+
