@@ -9,7 +9,19 @@ body {
     width:960px;
 }
 
+.portrait {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 50%;
+}
 
+img {
+    height:150px;
+    width:150px;
+    object-fit:cover;
+    border-radius: 50%;
+}
 
 .tab {
     float: left;
@@ -59,7 +71,7 @@ body {
     width: 70%;
     border-left: none;
     height: 300px;
-    margin-top: 300px;
+    margin-top: 200px;
 }
 
 .social-icons {
