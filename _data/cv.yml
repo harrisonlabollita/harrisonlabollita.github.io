@@ -1,0 +1,99 @@
+- title: General Information
+  type: map
+  contents:
+    - name: Full Name
+      value: Harry LaBollita
+    - name: Email
+      value: harrisonlabollita@gmail.com
+    - name: Phone
+      value: +1 (678) 895-8180
+
+- title: Education
+  type: time_table
+  contents:
+    - title: PhD, Physics
+      institution: Arizona State University, Tempe, AZ USA
+      year: 2024
+    - title: BS, Applied Mathematics and Applied Physics
+      institution: Piedmont University, Demorest, GA USA
+      year: 2019
+      description: Summa Cum Laude
+
+- title: Research Experience
+  type: time_table
+  contents:
+    - title: Graduate Research Assistant
+      institution: Arizona State University, Tempe, AZ USA
+      year: 2019 - 2023
+      description:
+        - Designed, performed, and published scientific research papers in computational many-body physics (strongly correlated electron systems).
+        - Built and contributed to open-source software and data analytic tools.
+        - Excellent teamwork and collaboration skills demonstrated by simulataneously working on several research projects with external research groups.
+        - Experience in technical communication evidenced by several published peer-reviewed articles, conference presentations, and courses taught at the high-school and undergraduate level.
+    - title: Pre-Doctoral Researcher
+      institution: Simons Foundation, Flatiron Institute (CCQ), New York, NY USA
+      year: 2022
+      description:
+        - Contributed several PRs to open-source software developed at the Center for Computational Quantum Physics (CCQ).
+        - Proactively collaborated cross-functionally to design and implement production quality software (in Python and C++) that met computational, mathematical, and physical requirements.
+
+    - title: Research Experience for Undergraduates
+      institution: Michigan State University, East Lansing, MI USA
+      year: 2018
+      description: Applied supervised machine learning algorithms as a novel data analysis technique for nuclear chemistry experiments.
+
+    - title: Research Experience for Undergraduates
+      institution: University of Florida, Gainesville, FL USA
+      year: 2017
+      description: Reserach mirror birefringence for the Any Light Particle Search (ALPS) experiment.
+
+
+- title: Honors and Awards
+  type: time_table
+  contents:
+    - year: 2022
+      items: 
+        - Wally Stolezel Scholarship
+    - year: 2021
+      items: 
+        - Wally Stolezel Scholarship
+    - year: 2020
+      items: 
+        - Teaching Excellence Award, GPSA, USA
+        - Arizona State University Summer Graduate Fellowship
+    - year: 2019
+      items: 
+        - NCAA Postgraduate Scholarship
+        - Highest GPA Male Athlete, Piedmont College
+        - Scholar of the Year, Piedmont College
+        - Math and Physics Department Scholarship, Piedmont College
+        - Glenn W. and Edna Ellard Scholarship
+    - year: 2016 - 2018
+      items: 
+        - Math and Physics Department Scholarship, Piedmont College
+        - Glenn W. and Edna Ellard Scholarship
+        - Seaborn Ashley and Dana Smith Ashley Scholarship
+    - year: 2015
+      items: 
+        - Trustee Scholarship
+
+- title: Academic Interests
+  type: nested_list
+  contents:
+    - title: Modelling strongly correlated materials
+      items: 
+        - Rare-earth nickelates
+        - Cuprates
+        - Two-dimensional magnets
+    - title: Many-body computational methods
+      items:
+        - DFT, DFT+U
+        - DFT+DMFT
+        - Quantum Impurity solvers
+    - title: Data-driven materials discovery
+    - title: Quantum computing for electronic structure methods
+
+- title: Personal Interests
+  type: list
+  contents:
+    - <u>Hobbies:</u> Tennis, Running, Cycling, Swimming, Golf, Hiking

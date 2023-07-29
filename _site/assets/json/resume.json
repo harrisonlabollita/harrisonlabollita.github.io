@@ -1,0 +1,70 @@
+{
+  "basics": {
+    "name": "Harry LaBollita",
+    "label": "Research Scientist",
+    "image": "",
+    "email": "harrisonlabollita@gmail.com",
+    "phone": "",
+    "url": "https://harrisonlabollita.github.io",
+    "summary": "Research scientist with expertise in using and developing computational methods for scientific research (i.e., condensed matter physics, quantum chemistry). Proficient in quantum (many-body) physics and quantum chemistry methods, mathematical modeling/optimization, machine learning, data analysis, and resourceful problem solving. Self-driven, team player that is capable of efficiently and effectively designing and implementing novel computational and/or data-driven solutions that drive impactful scientific research, fostering positive global impact.",
+    "location": {
+      "address": "",
+      "postalCode": "85281",
+      "city": "Tempe",
+      "countryCode": "USA",
+      "region": "Arizona"
+    },
+    "profiles": [
+      {
+        "network": "Twitter",
+        "username": "harrylabollita",
+        "url": "https://twitter.com/harrylabollita"
+      }
+    ]
+  },
+  "work": [
+    {
+      "name": "Institute for Advanced Study, Princeton University",
+      "position": "Professor of Theoretical Physics",
+      "url": "https://example.com",
+      "startDate": "1933-01-01",
+      "endDate": "1955-01-01",
+      "summary": "Teaching at Palmer Physical Laboratory (now 302 Frist Campus Center). While not a professor at Princeton, I associated with the physics professors and continued to give lectures on campus.",
+      "highlights": [
+        "Relativity"
+      ]
+    }
+  ],
+  "volunteer": [],
+  "education": [
+    {
+      "institution": "University of Zurich, Zurich, Switzerland",
+      "url": "https://www.uzh.ch/",
+      "area": "Software Development",
+      "studyType": "PhD",
+      "startDate": "1905-01-01",
+      "endDate": "1905-01-01",
+      "score": "",
+      "courses": [
+        "Theory of Relativity"
+      ]
+    }
+  ],
+  "awards": [
+    {
+      "title": "Nobel Prize in Physics",
+      "date": "1921-11-01",
+      "awarder": "Royal Swedish Academy of Sciences",
+      "summary": "The Nobel Prizes are five separate prizes that, according to Alfred Nobel's will of 1895, are awarded to 'those who, during the preceding year, have conferred the greatest benefit to humankind.'"
+    }
+  ],
+  "certificates": [],
+  "publications": [],
+  "skills": [],
+  "languages": []
+  "interests": [],
+  "references": [
+      "References" : "Available upon request."
+  ],
+  "projects": []
+}
