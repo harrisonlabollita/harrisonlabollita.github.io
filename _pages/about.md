@@ -16,7 +16,7 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true          # includes social icons at the bottom of the page
 ---
 
-I use and develop computational tools to study strongly correlated materials. Specifically,I study the correlated electronic structure of rare-earth nickelates using ab-initio methods. For more info, checkout some my recent publications.
+I use and develop computational tools to study strongly correlated materials. Specifically, I study the correlated electronic structure of rare-earth nickelates using ab-initio methods. For more info, checkout some my recent publications.
 
 #### Reserach Interests 👨‍🔬
 - Modeling strongly correlated electron materials using DFT+DMFT
