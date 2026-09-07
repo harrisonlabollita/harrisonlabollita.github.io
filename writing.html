@@ -1,0 +1,25 @@
+---
+layout: page
+title: Writing
+permalink: /writing/
+standfirst: >-
+  Notes on physics, numerics, and the software in between.
+---
+
+{% if site.posts.size > 0 %}
+<ul class="posts">
+  {%- for post in site.posts %}
+  <li class="post-item">
+    <p class="post-item__title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></p>
+    <p class="post-item__meta">
+      <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %-d, %Y" }}</time>
+    </p>
+    {%- if post.description %}
+    <p class="post-item__desc">{{ post.description }}</p>
+    {%- endif %}
+  </li>
+  {%- endfor %}
+</ul>
+{% else %}
+<p class="empty">Nothing published yet.</p>
+{% endif %}

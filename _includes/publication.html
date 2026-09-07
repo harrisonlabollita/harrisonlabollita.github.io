@@ -1,0 +1,23 @@
+{%- comment -%}
+Renders one entry from _data/publications.yml. The author's own name is bolded
+and the equal-contribution star is preserved from the CV source.
+{%- endcomment -%}
+<li class="pub">
+  <p class="pub__title">
+    {%- if include.pub.url -%}
+    <a href="{{ include.pub.url }}">{{ include.pub.title }}</a>
+    {%- else -%}
+    {{ include.pub.title }}
+    {%- endif -%}
+  </p>
+  <p class="pub__authors">
+    {{- include.pub.authors | replace: "H. LaBollita", '<span class="me">H. LaBollita</span>' -}}
+  </p>
+  <p class="pub__meta">
+    <span class="pub__ref">{{ include.pub.reference }}</span>
+    {%- if include.pub.equal_contribution %}<span class="tag">equal contribution</span>{% endif -%}
+    {%- if include.pub.arxiv %}
+    <span class="pub__links"><a href="{{ include.pub.arxiv }}">arXiv</a></span>
+    {%- endif %}
+  </p>
+</li>

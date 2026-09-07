@@ -1,0 +1,109 @@
+# Software shown on /software/. `role` distinguishes packages led/authored
+# from projects contributed to. Only entries marked `featured: true` are
+# rendered on the page; the rest are reachable via the GitHub link at the end.
+
+led:
+  - name: ModEST
+    repo: https://github.com/TRIQS/modest
+    language: C++ / Python
+    role: lead developer
+    featured: true
+    description: >-
+      Modular Electronic Structure Toolkit — a generic framework for DFT+DMFT
+      inside TRIQS. Separates the one-body problem, the embedding, and the
+      k-summation so that new electronic-structure workflows can be assembled
+      from parts rather than rewritten each time.
+    note: Supported by the Flatiron Institute.
+
+  - name: triqs_dftkit
+    repo: https://github.com/harrisonlabollita/dftkit
+    language: Python
+    role: author
+    featured: true
+    description: >-
+      DFT converters for TRIQS. Turns output from Elk, Wien2k, and other
+      electronic-structure codes into the TRIQS HDF5 format that downstream
+      DMFT calculations expect.
+    doi: https://doi.org/10.5281/zenodo.21691784
+
+  - name: triqs_ana_cont_interface
+    repo: https://github.com/harrisonlabollita/ana_cont_interface
+    language: Python
+    role: author
+    description: >-
+      A TRIQS front-end for ana_cont. Hand it a Green's function or self-energy
+      on an imaginary mesh and get the real-frequency continuation back, with
+      the physics conventions applied once and the diagnostics needed to judge
+      the result attached to the output.
+
+  - name: dyson-solve
+    repo: https://github.com/harrisonlabollita/dyson-solve
+    language: Python
+    role: author
+    description: >-
+      Solves the Dyson equation by constrained residual minimization, which
+      stabilizes the self-energy against Monte Carlo noise without tail fitting.
+    paper: Phys. Rev. B 111, 115155 (2025)
+
+  - name: qutbzoo
+    repo: https://github.com/harrisonlabollita/qutbzoo
+    language: Python
+    role: author
+    featured: true
+    description: >-
+      A zoo of tight-binding lattice models that emit TRIQS objects. Build a
+      model, transform it (spin, Nambu, spin spirals, supercells), and get what
+      a solver needs — so unconventional superconductivity and non-collinear
+      magnetism are set up correctly by construction rather than by hand.
+
+  - name: dosrixs
+    repo: https://github.com/harrisonlabollita/dosrixs
+    language: Python
+    role: author
+    description: >-
+      Computes RIXS and XAS spectra from orbitally-resolved density of states,
+      including polarization-dependent matrix elements, to help interpret
+      itinerant and charge-transfer features in experimental spectra.
+
+  - name: w2kplot
+    repo: https://github.com/harrisonlabollita/w2kplot
+    language: Python
+    role: author
+    description: >-
+      A matplotlib wrapper for Wien2k post-processing: band structures,
+      fatbands, and densities of states from raw Wien2k output in a few lines.
+
+  - name: tinycthyb
+    repo: https://github.com/harrisonlabollita/tinycthyb
+    language: C++
+    role: author
+    description: >-
+      A tiny continuous-time hybridization-expansion quantum Monte Carlo
+      solver, written to understand the algorithm from the ground up.
+
+  - name: ris-2-bib
+    repo: https://github.com/harrisonlabollita/ris-2-bib
+    language: Go
+    role: author
+    description: >-
+      A command-line tool that converts RIS bibliography files to BibTeX.
+
+contributed:
+  - name: TRIQS
+    repo: https://github.com/TRIQS/triqs
+    description: Toolbox for Research on Interacting Quantum Systems.
+  - name: cthyb
+    repo: https://github.com/TRIQS/cthyb
+    description: Fast and generic hybridization-expansion impurity solver.
+  - name: solid_dmft
+    repo: https://github.com/TRIQS/solid_dmft
+    description: Python wrapper for performing DFT+DMFT calculations.
+  - name: dft_tools
+    repo: https://github.com/TRIQS/dft_tools
+    description: TRIQS interface to DFT codes.
+  - name: nda
+    repo: https://github.com/TRIQS/nda
+    description: C++ library for multi-dimensional arrays.
+  - name: clair
+    repo: https://github.com/flatironinstitute/clair
+    description: Clang introspection and reflection tools for C++/Python bindings.

@@ -1,27 +1,24 @@
 ---
 layout: default
 ---
-<!-- page.html -->
-        <div class="post">
+<article class="page">
+  <h1 class="page__title">{{ page.title }}</h1>
 
-          <header class="post-header">
-            <h1 class="post-title">{{ page.title }}</h1>
-            <p class="post-description">{{ page.description }}</p>
-          </header>
+  {%- if page.standfirst %}
+  <p class="standfirst{% if page.contents %} standfirst--flush{% endif %}">{{ page.standfirst }}</p>
+  {%- endif %}
 
-          <article>
-            {{ content }}
-          </article>
+  {%- comment -%}
+  In-page index. Populated from the page's `contents:` front matter so the
+  list lives next to the prose it points at.
+  {%- endcomment -%}
+  {%- if page.contents %}
+  <nav class="toc" aria-label="On this page">
+    {%- for item in page.contents %}
+    <a href="#{{ item.anchor }}">{{ item.title }}</a>
+    {%- endfor %}
+  </nav>
+  {%- endif %}
 
-          {%- if page.related_publications != null and page.related_publications.size > 0 -%}
-          {% assign publications = page.related_publications | replace: ", ", "," | split: "," | join: "|" %}
-          <h2>References</h2>
-          <div class="publications">
-            {% bibliography -f {{ site.scholar.bibliography }} -q @*[key^={{ publications }}]* %}
-          </div>
-          {%- endif %}
-
-          {%- if site.giscus.repo and page.giscus_comments -%}
-            {% include giscus.html %}
-          {%- endif -%}
-        </div>
+  {{ content }}
+</article>

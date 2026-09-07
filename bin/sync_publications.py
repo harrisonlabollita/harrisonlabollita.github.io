@@ -1,0 +1,152 @@
+#!/usr/bin/env python3
+"""Generate _data/publications.yml from the publications section of the LaTeX CV.
+
+The CV is the single source of truth for the publication list. Run this after
+updating it so the website does not drift:
+
+    bin/sync_publications.py path/to/sections/publications.tex
+"""
+
+import argparse
+import pathlib
+import re
+import sys
+
+SUB = str.maketrans("0123456789+-=()n", "\u2080\u2081\u2082\u2083\u2084\u2085\u2086\u2087\u2088\u2089\u208a\u208b\u208c\u208d\u208e\u2099")
+SUP = str.maketrans("0123456789+-=()n", "\u2070\u00b9\u00b2\u00b3\u2074\u2075\u2076\u2077\u2078\u2079\u207a\u207b\u207c\u207d\u207e\u207f")
+
+ACCENTS = {
+    r"\'e": "\u00e9", r"\'E": "\u00c9", r"\'a": "\u00e1", r"\'o": "\u00f3",
+    r"\'i": "\u00ed", r"\`e": "\u00e8", r"\`a": "\u00e0", r"\"o": "\u00f6",
+    r"\"u": "\u00fc", r"\~n": "\u00f1", r"\^o": "\u00f4",
+}
+
+# Author name we render in bold on the site.
+ME = "H. LaBollita"
+
+
+def strip_math(text):
+    """Turn simple LaTeX sub/superscripts into Unicode, drop the rest of the math."""
+
+    def render(match):
+        kind, body = match.group(1), match.group(2)
+        body = body.replace(r"\delta", "\u03b4").replace(r"\star", "\u2605")
+        table = SUB if kind == "_" else SUP
+        converted = body.translate(table)
+        # Only accept the Unicode form if every character actually mapped.
+        return converted if all(c not in "0123456789+-=()n" for c in converted) else body
+
+    def demath(match):
+        inner = match.group(1)
+        inner = re.sub(r"([_^])\{([^{}]*)\}", render, inner)
+        inner = re.sub(r"([_^])(\w)", lambda m: render((m.group(1), m.group(2)) and m), inner)
+        return inner
+
+    text = re.sub(r"\$(.+?)\$", demath, text)
+    return text
+
+
+def clean(text):
+    """Reduce a LaTeX fragment to display text, flagging the target author."""
+    text = strip_math(text)
+    for tex, char in ACCENTS.items():
+        text = text.replace(tex, char)
+    # Any remaining \' is an apostrophe, not an accent (e.g. N\'Diaye).
+    text = text.replace("\\'", "'")
+    text = re.sub(r"\\textbf\{(.+?)\}", r"\1", text)
+    text = re.sub(r"\\textit\{(.+?)\}", r"\1", text)
+    text = re.sub(r"\{\\bf (.+?)\}", r"\1", text)
+    text = re.sub(r"\\texbf\{(.+?)\}", r"\1", text)  # typo present in the CV source
+    # Line breaks go first: "\\M. Akram" must not lose the initial to the
+    # control-sequence strip below.
+    text = text.replace("\\\\", " ")
+    text = re.sub(r"\\[a-zA-Z]+", "", text)
+    text = text.replace("{", "").replace("}", "")
+    text = text.replace("``", "").replace("''", "")
+    return re.sub(r"\s+", " ", text).strip(" ,")
+
+
+def parse(source):
+    chunks = re.split(r"\{\\small\s+(\d+)\.\s+", source)[1:]
+    records = []
+
+    for number, body in zip(chunks[0::2], chunks[1::2]):
+        body = body.split("%")[0]
+
+        title_match = re.search(r"``(.+?)''", body, re.DOTALL)
+        if not title_match:
+            print(f"  ! entry {number}: no title found, skipped", file=sys.stderr)
+            continue
+        title = clean(title_match.group(1))
+        rest = body[title_match.end():]
+
+        links = re.findall(r"\\href\{([^}]+)\}\{((?:[^{}]|\{[^{}]*\})*)\}", rest)
+        arxiv = next((url for url, label in links if "arxiv" in label.lower()), None)
+        journal = next(((url, label) for url, label in links if "arxiv" not in label.lower()), None)
+
+        if journal:
+            url = journal[0]
+            reference = clean(journal[1])
+            authors = clean(rest[:rest.index("\\href")])
+        else:
+            # Unpublished: the reference is the last line of plain text before
+            # the arXiv link, and there is no journal URL to link the title to.
+            url = None
+            parts = [p for p in rest.split("\\href")[0].split("\\\\") if p.strip()]
+            reference = clean(parts[-1]).rstrip(" [")
+            authors = clean("\\\\".join(parts[:-1]))
+
+        year_match = re.search(r"\b(19|20)\d{2}\b", reference)
+        records.append({
+            "number": int(number),
+            "title": title,
+            "authors": authors,
+            "reference": reference,
+            "year": int(year_match.group(0)) if year_match else None,
+            "url": url,
+            "arxiv": arxiv,
+            "equal_contribution": "\u2605" in authors,
+        })
+
+    return sorted(records, key=lambda r: r["number"], reverse=True)
+
+
+def quote(value):
+    return '"' + str(value).replace("\\", "\\\\").replace('"', '\\"') + '"'
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("source", type=pathlib.Path, help="path to publications.tex")
+    parser.add_argument("-o", "--output", type=pathlib.Path,
+                        default=pathlib.Path("_data/publications.yml"))
+    args = parser.parse_args()
+
+    records = parse(args.source.read_text(encoding="utf-8"))
+
+    lines = [
+        "# Generated by bin/sync_publications.py from the LaTeX CV. Do not hand-edit.",
+        f"# Source: {args.source}",
+        "",
+    ]
+    for record in records:
+        lines.append(f"- number: {record['number']}")
+        lines.append(f"  title: {quote(record['title'])}")
+        lines.append(f"  authors: {quote(record['authors'])}")
+        lines.append(f"  reference: {quote(record['reference'])}")
+        if record["year"]:
+            lines.append(f"  year: {record['year']}")
+        if record["url"]:
+            lines.append(f"  url: {quote(record['url'])}")
+        if record["arxiv"]:
+            lines.append(f"  arxiv: {quote(record['arxiv'])}")
+        if record["equal_contribution"]:
+            lines.append("  equal_contribution: true")
+        lines.append("")
+
+    args.output.write_text("\n".join(lines), encoding="utf-8")
+    print(f"wrote {len(records)} publications to {args.output}")
+
+
+if __name__ == "__main__":
+    main()
