@@ -4,9 +4,13 @@ on:
   push:
     branches: ["master"]
   workflow_dispatch:
+  # Refresh the citation counts on the 1st of each month, 06:00 UTC.
+  schedule:
+    - cron: "0 6 1 * *"
 
 permissions:
-  contents: read
+  # contents: write so the scheduled run can commit refreshed metrics.
+  contents: write
   pages: write
   id-token: write
 
@@ -19,6 +23,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      # Papers come from the CV, which lives outside this repo, so only the
+      # citation half refreshes on a schedule. Building in the same run means
+      # the deploy below picks the new numbers up: a commit pushed with
+      # GITHUB_TOKEN does not start a second workflow.
+      - name: Refresh citation metrics
+        if: github.event_name == 'schedule'
+        run: |
+          python3 -m pip install --quiet pyyaml
+          python3 bin/sync_metrics.py
+      - name: Commit refreshed metrics
+        if: github.event_name == 'schedule'
+        run: |
+          if git diff --quiet -- _data/metrics.yml; then
+            echo "metrics unchanged"
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "Refresh citation metrics from OpenAlex" -- _data/metrics.yml
+            git push
+          fi
+
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.3"
