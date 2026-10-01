@@ -1,0 +1,48 @@
+{%- comment -%}
+One column chart. Heights are percentages worked out here, so the markup stays
+static and the panel needs no JavaScript.
+
+  rows   list of year rows from _data/metrics.yml
+  key    field drawn as the solid segment
+  stack  optional field drawn as the hatched segment on top
+  alt    accessible description of the chart
+{%- endcomment -%}
+
+{%- assign max = 0 -%}
+{%- for row in include.rows -%}
+  {%- assign total = row[include.key] -%}
+  {%- if include.stack -%}{%- assign total = total | plus: row[include.stack] -%}{%- endif -%}
+  {%- if total > max -%}{%- assign max = total -%}{%- endif -%}
+{%- endfor -%}
+
+<figure class="chart" role="img" aria-label="{{ include.alt }}">
+  <div class="chart__plot">
+    {%- for row in include.rows -%}
+    {%- assign main = row[include.key] -%}
+    {%- assign extra = 0 -%}
+    {%- if include.stack -%}{%- assign extra = row[include.stack] -%}{%- endif -%}
+    {%- assign total = main | plus: extra -%}
+    <div class="chart__col">
+      <div class="chart__bar">
+        <div class="chart__stack" style="height: {{ total | times: 100.0 | divided_by: max | round: 2 }}%">
+          <span class="chart__value">{{ total }}</span>
+          {%- if extra > 0 %}
+          <span class="chart__seg chart__seg--alt" style="height: {{ extra | times: 100.0 | divided_by: total | round: 2 }}%"></span>
+          {%- endif %}
+          {%- if main > 0 %}
+          <span class="chart__seg" style="height: {{ main | times: 100.0 | divided_by: total | round: 2 }}%"></span>
+          {%- endif %}
+        </div>
+      </div>
+      <span class="chart__year">{{ row.year }}</span>
+    </div>
+    {%- endfor %}
+  </div>
+
+  {%- if include.stack %}
+  <figcaption class="chart__legend">
+    <span class="chart__key">{{ include.legend }}</span>
+    <span class="chart__key chart__key--alt">{{ include.legend_stack }}</span>
+  </figcaption>
+  {%- endif %}
+</figure>

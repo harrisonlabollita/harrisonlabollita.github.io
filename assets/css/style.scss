@@ -461,6 +461,188 @@ hr {
 .stats strong { color: var(--fg); font-weight: 620; }
 
 /* ---------------------------------------------------------------------------
+   Research output charts
+   --------------------------------------------------------------------------- */
+
+.metrics {
+  margin: 1.75rem 0 2.5rem;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 1.25rem 1.25rem 1rem;
+}
+
+/* The radios drive the tabs; they stay focusable but never shown. */
+.metrics__radio {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.metrics__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.25rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.8125rem;
+}
+
+.metrics__tabs label {
+  cursor: pointer;
+  color: var(--fg-muted);
+  padding-bottom: 0.3rem;
+}
+
+.metrics__tabs label:hover { color: var(--fg); }
+
+.metrics__panel { display: none; }
+
+#metrics-papers:checked ~ .metrics__tabs label[for="metrics-papers"],
+#metrics-papers-cum:checked ~ .metrics__tabs label[for="metrics-papers-cum"],
+#metrics-cites:checked ~ .metrics__tabs label[for="metrics-cites"],
+#metrics-cites-cum:checked ~ .metrics__tabs label[for="metrics-cites-cum"] {
+  color: var(--fg);
+  font-weight: 620;
+  box-shadow: inset 0 -2px 0 var(--accent);
+}
+
+#metrics-papers:focus-visible ~ .metrics__tabs label[for="metrics-papers"],
+#metrics-papers-cum:focus-visible ~ .metrics__tabs label[for="metrics-papers-cum"],
+#metrics-cites:focus-visible ~ .metrics__tabs label[for="metrics-cites"],
+#metrics-cites-cum:focus-visible ~ .metrics__tabs label[for="metrics-cites-cum"] {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+#metrics-papers:checked ~ .metrics__panels .metrics__panel--papers,
+#metrics-papers-cum:checked ~ .metrics__panels .metrics__panel--papers-cum,
+#metrics-cites:checked ~ .metrics__panels .metrics__panel--cites,
+#metrics-cites-cum:checked ~ .metrics__panels .metrics__panel--cites-cum {
+  display: block;
+}
+
+.chart { margin: 0; }
+
+.chart__plot {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  /* Room for the value labels, which sit above each bar. */
+  padding-top: 1.35rem;
+  border-bottom: 1px solid var(--rule-strong);
+}
+
+.chart__col {
+  flex: 1;
+  min-width: 0;
+  text-align: center;
+}
+
+.chart__bar {
+  display: flex;
+  align-items: flex-end;
+  height: 9rem;
+}
+
+.chart__stack {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 2px;
+  width: 100%;
+  /* Bars read as thin marks, not blocks, however wide the column gets. */
+  max-width: 2.25rem;
+  margin: 0 auto;
+}
+
+.chart__seg {
+  display: block;
+  min-height: 2px;
+  background: var(--accent);
+  border-radius: 3px 3px 0 0;
+}
+
+/* Preprints: the same hue a step lighter, plus a hatch so the distinction
+   survives greyscale, print and colour-blind vision. */
+.chart__seg--alt {
+  background-color: #4cbee7;
+  background-image: repeating-linear-gradient(
+    45deg, var(--bg) 0 1px, transparent 1px 4px);
+}
+
+@media (prefers-color-scheme: dark) {
+  .chart__seg--alt { background-color: #23617b; }
+}
+
+.chart__seg + .chart__seg { border-radius: 0; }
+
+.chart__value {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding-bottom: 0.3rem;
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--fg-muted);
+}
+
+.chart__year {
+  display: block;
+  padding-top: 0.45rem;
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--fg-faint);
+}
+
+.chart__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 1.1rem;
+  margin: 0.9rem 0 0;
+  font-size: 0.75rem;
+  color: var(--fg-muted);
+}
+
+.chart__key { display: flex; align-items: center; gap: 0.4rem; }
+
+.chart__key::before {
+  content: "";
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 2px;
+  background: var(--accent);
+}
+
+.chart__key--alt::before {
+  background-color: #4cbee7;
+  background-image: repeating-linear-gradient(
+    45deg, var(--bg) 0 1px, transparent 1px 4px);
+}
+
+@media (prefers-color-scheme: dark) {
+  .chart__key--alt::before { background-color: #23617b; }
+}
+
+.metrics__note {
+  margin: 1.1rem 0 0;
+  font-size: 0.75rem;
+  color: var(--fg-faint);
+}
+
+.metrics__note a { color: inherit; }
+
+@media (max-width: 30rem) {
+  .metrics { padding: 1rem 0.75rem 0.85rem; }
+  .chart__bar { height: 7rem; }
+  .chart__value, .chart__year { font-size: 0.6875rem; }
+}
+
+/* ---------------------------------------------------------------------------
    Software
    --------------------------------------------------------------------------- */
 

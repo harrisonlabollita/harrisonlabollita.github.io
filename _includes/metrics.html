@@ -1,0 +1,50 @@
+{%- comment -%}
+Research-output panel. The four views are radio buttons styled as tabs: the
+checked one reveals its chart through a sibling selector, so there is no script
+on the page. Data comes from _data/metrics.yml (bin/sync_metrics.py).
+{%- endcomment -%}
+
+{%- assign m = site.data.metrics -%}
+{%- if m -%}
+<div class="metrics">
+  <input class="metrics__radio" type="radio" name="metrics" id="metrics-papers" checked>
+  <input class="metrics__radio" type="radio" name="metrics" id="metrics-papers-cum">
+  <input class="metrics__radio" type="radio" name="metrics" id="metrics-cites">
+  <input class="metrics__radio" type="radio" name="metrics" id="metrics-cites-cum">
+
+  <div class="metrics__tabs">
+    <label for="metrics-papers">Papers / year</label>
+    <label for="metrics-papers-cum">Papers, cumulative</label>
+    <label for="metrics-cites">Citations / year</label>
+    <label for="metrics-cites-cum">Citations, cumulative</label>
+  </div>
+
+  <div class="metrics__panels">
+    <div class="metrics__panel metrics__panel--papers">
+      {%- include metrics-chart.html rows=m.years key="papers" stack="preprints"
+          legend="Published" legend_stack="Under review"
+          alt="Papers published per year, with preprints under review stacked on top." -%}
+    </div>
+    <div class="metrics__panel metrics__panel--papers-cum">
+      {%- include metrics-chart.html rows=m.years key="papers_cum" stack="preprints_cum"
+          legend="Published" legend_stack="Under review"
+          alt="Cumulative paper count by year, with preprints under review stacked on top." -%}
+    </div>
+    <div class="metrics__panel metrics__panel--cites">
+      {%- include metrics-chart.html rows=m.years key="citations"
+          alt="Citations received per year." -%}
+    </div>
+    <div class="metrics__panel metrics__panel--cites-cum">
+      {%- include metrics-chart.html rows=m.years key="citations_cum"
+          alt="Cumulative citation count by year." -%}
+    </div>
+  </div>
+
+  {%- assign last = m.years | last -%}
+  <p class="metrics__note">
+    {{ m.citations_total }} citations · h-index {{ m.h_index }} ·
+    citations from <a href="https://openalex.org/">OpenAlex</a>, {{ m.updated | date: "%b %Y" }} ·
+    {{ last.year }} is still in progress
+  </p>
+</div>
+{%- endif -%}

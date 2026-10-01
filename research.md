@@ -15,6 +15,8 @@ contents:
     anchor: materials
   - title: Software
     anchor: software
+  - title: Output
+    anchor: output
 ---
 
 Designing and understanding quantum materials from first principles is the
@@ -98,6 +100,10 @@ engineering effort.
 toolkit, is built as a state-of-the-art library for generic quantum embedding calculations 
 of quantum materials. It is open source and built to be user-friendly for both experts and 
 researchers just getting started.
+
+<h2 id="output">Research output</h2>
+
+{% include metrics.html %}
 
 <p class="section__more">
   <a href="{{ '/publications/' | relative_url }}">Publications &rarr;</a>
